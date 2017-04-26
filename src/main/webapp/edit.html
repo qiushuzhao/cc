@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>编辑用户</title>
+</head>
+<body>
+	<form action="/user/update">
+		姓名：<input id="name" type="text" name="name" value="${user.name}">
+		电话：<input id="tel" type="text" name="tel" value="${user.tel}">
+		<input id="id" name="id" type="hidden" value="${user.id}">
+		<input id="submit" type="submit" value="修改">
+	</form>
+</body>
+</html>

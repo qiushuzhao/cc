@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.UserDao">
+	<!-- 定义的返回结果集，如果需要返回List集合，就需要配置resultMap并且id显示
+	的是返回结果集的id，这里定义为resultUserList，如果需要返回User的集合，
+	就只需要在select中定义 resultMap="resultUserList"即可，注意这里不是resultType-->
+	<resultMap type="User" id="resultUserList">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="tel" property="tel"/>
+	</resultMap>
+	
+    <select id="getUsersByName" resultMap="resultUserList" parameterType="string">
+        select * from user where name like #{name}
+    </select>
+    <select id="getAllUser" resultMap="resultUserList">
+    	select * from user
+    </select>
+    <!-- userGeneratedKeys为自动生成主键 -->
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    	insert into user(name,tel) values(#{name},#{tel})
+    </insert>
+    
+    <delete id="deleteUserById" parameterType="int">
+    	delete from user where id=#{id}
+    </delete>
+    
+    <update id="updateUserById" parameterType="User">
+    	update user set name=#{name},tel=#{tel} where id=#{id}
+    </update>
+    
+    <select id="getUserById" resultType="User" parameterType="int">
+    	select * from user where id=#{id}
+    </select>
+</mapper>
